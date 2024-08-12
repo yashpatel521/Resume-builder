@@ -14,3 +14,9 @@ export interface UserDocument {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface NavItemType {
+  title: string;
+  href: string;
+  icon: string;
+}
