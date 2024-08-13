@@ -12,9 +12,9 @@ const navItems: NavItemType[] = [
     icon: "InfoIcon",
   },
   {
-    title: "Pricing",
-    href: "/Pricing",
-    icon: "MailIcon",
+    title: "Templates",
+    href: "/templates",
+    icon: "FileStack",
   },
   {
     title: "Contact",

@@ -1,11 +1,16 @@
 import Header from "@/components/header";
 import React from "react";
 
-const Layout = () => {
+const Layout = ({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) => {
   return (
-    <div>
+    <>
       <Header />
-    </div>
+      <main className="flex-grow">{children}</main>
+    </>
   );
 };
 

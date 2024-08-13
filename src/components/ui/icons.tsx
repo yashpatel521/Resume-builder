@@ -1,4 +1,11 @@
-import { HomeIcon, InfoIcon, MailIcon, PhoneIcon, X } from "lucide-react";
+import {
+  FileStack,
+  HomeIcon,
+  InfoIcon,
+  MailIcon,
+  PhoneIcon,
+  X,
+} from "lucide-react";
 type IconProps = React.HTMLAttributes<SVGElement>;
 
 export const Icons: any = {
@@ -7,4 +14,5 @@ export const Icons: any = {
   MailIcon: MailIcon,
   PhoneIcon: PhoneIcon,
   close: X,
+  FileStack: FileStack,
 };
