@@ -3,22 +3,22 @@ import { NavItemType } from "@/type";
 const navItems: NavItemType[] = [
   {
     title: "Home",
-    href: "/",
+    href: "/resume",
     icon: "HomeIcon",
   },
   {
     title: "Features",
-    href: "/Features",
+    href: "/resume/features",
     icon: "InfoIcon",
   },
   {
     title: "Templates",
-    href: "/templates",
+    href: "/resume/templates",
     icon: "FileStack",
   },
   {
     title: "Contact",
-    href: "/Contact",
+    href: "/resume/Contact",
     icon: "PhoneIcon",
   },
 ];
