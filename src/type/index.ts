@@ -31,13 +31,18 @@ export interface Education {
   graduationYear: string;
 }
 
-export interface Experience {
+export interface ExperienceDocument {
   company: string;
   position: string;
-  duration: string;
+  startDate: Date;
+  endDate: Date;
   location: string;
   responsibilities: string[];
-  achievements: string[];
+  projects: string[];
+  createdAt: Date;
+  userId: string;
+  formNumber: number;
+  updatedAt: Date;
 }
 
 export interface Project {
@@ -74,7 +79,7 @@ export interface UserDataType {
   state: string;
   zip: string;
   education: Education[];
-  experience: Experience[];
+  // experience: Experience[];
   projects: Project[];
   socialMedia: SocialMedia;
   hobbies: string[];
@@ -82,4 +87,17 @@ export interface UserDataType {
   languages: string[];
   certifications: Certification[];
   skills: Skill[];
+}
+
+export interface experienceFormType {
+  _id: "";
+  company: string;
+  position: string;
+  startDate: Date;
+  endDate: Date;
+  location: string;
+  responsibilities: string[];
+  projects: string[];
+  userId: string;
+  formNumber: number;
 }

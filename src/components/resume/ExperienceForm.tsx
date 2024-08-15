@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -7,6 +7,7 @@ import { format } from "date-fns";
 import {
   Calendar as CalendarIcon,
   CirclePlusIcon,
+  Loader,
   Trash2Icon,
 } from "lucide-react";
 
@@ -17,14 +18,33 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import axios from "axios";
+import { toast } from "../ui/use-toast";
+import { experienceFormType } from "@/type";
+import { useRouter } from "next/navigation";
 
-const ExperienceForm = ({ formId }: { formId: number }) => {
-  const [startDate, setStartDate] = React.useState<Date>();
-  const [endDate, setEndDate] = React.useState<Date>();
-  const [projects, setProjects] = React.useState<string[]>([""]);
-  const [responsibilities, setResponsibilities] = React.useState<string[]>([
-    "",
-  ]);
+const ExperienceForm = ({
+  experienceFormData,
+}: {
+  experienceFormData: experienceFormType;
+}) => {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [companyName, setCompanyName] = useState(experienceFormData.company);
+  const [position, setPosition] = useState(experienceFormData.position);
+  const [startDate, setStartDate] = useState<Date | undefined>(
+    experienceFormData.startDate
+  );
+  const [endDate, setEndDate] = useState<Date | undefined>(
+    experienceFormData.endDate
+  );
+  const [projects, setProjects] = useState<string[]>(
+    experienceFormData.projects
+  );
+  const [responsibilities, setResponsibilities] = useState<string[]>(
+    experienceFormData.responsibilities
+  );
+  const [location, setLocation] = useState(experienceFormData.location);
 
   // Functions for managing projects
   const handleAddProject = () => {
@@ -64,51 +84,121 @@ const ExperienceForm = ({ formId }: { formId: number }) => {
     }
   };
 
+  const handleSubmit = async () => {
+    setLoading(true);
+    const formData = {
+      _id: experienceFormData._id,
+      userId: experienceFormData.userId,
+      formNumber: experienceFormData.formNumber,
+      company: companyName,
+      position,
+      startDate,
+      endDate,
+      location,
+      responsibilities,
+      projects,
+    };
+    // Send the formData to your backend API endpoint
+    if (formData._id) {
+      // update
+      const response = await axios.post(
+        `/api/experience/${formData._id}`,
+        formData
+      );
+      const data = response.data;
+      if (data.success) {
+        toast({
+          title: "Experience Updated",
+          description: "Your experience has been successfully updated!",
+        });
+      } else {
+        toast({
+          title: "Error Updating Experience",
+          description: data.message,
+          variant: "destructive",
+        });
+      }
+    } else {
+      // create
+      const response = await axios.post("/api/experience", formData);
+      const data = response.data;
+      if (data.success) {
+        router.prefetch("/resume");
+        toast({
+          title: "Experience Saved",
+          description: "Your experience has been successfully saved!",
+        });
+      } else {
+        toast({
+          title: "Error Saving Experience",
+          description: data.message,
+          variant: "destructive",
+        });
+      }
+    }
+    setLoading(false);
+  };
+
+  const handleDelete = async () => {
+    const response = await axios.delete(
+      `/api/experience/${experienceFormData._id}`
+    );
+    const data = response.data;
+    if (data.success) {
+      router.prefetch("/resume");
+      toast({
+        title: "Experience Deleted",
+        description: "Your experience has been successfully deleted!",
+      });
+    } else {
+      toast({
+        title: "Error Deleting Experience",
+        description: data.message,
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
-    <form className="border p-2 mb-5">
+    <>
       <h1 className="text-center text-accent-foreground text-2xl">
-        Form Experience {++formId}
+        Form Experience {experienceFormData.formNumber}
       </h1>
       <hr className="w-1/2 m-auto my-2" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
         <div className="mb-4">
-          <Label
-            htmlFor={`companyName-${++formId}`}
-            className="block font-medium text-md"
-          >
+          <Label htmlFor="companyName" className="block font-medium text-md">
             Company Name:
           </Label>
           <Input
             type="text"
-            id={`companyName-${++formId}`}
-            name={`companyName-${++formId}`}
+            id="companyName"
+            name="companyName"
             className="mt-1 p-2 w-full border rounded-md shadow-sm h-8"
             placeholder="Enter Company Name"
             required
+            value={companyName}
+            onChange={(e) => setCompanyName(e.target.value)}
           />
         </div>
         <div className="mb-4">
-          <Label
-            htmlFor={`position-${++formId}`}
-            className="block font-medium text-md"
-          >
+          <Label htmlFor="position" className="block font-medium text-md">
             Position:
           </Label>
           <Input
             type="text"
-            id={`position-${++formId}`}
-            name={`position-${++formId}`}
+            id="position"
+            name="position"
             className="mt-1 p-2 w-full border rounded-md shadow-sm h-8"
             placeholder="Enter Position"
             required
+            value={position}
+            onChange={(e) => setPosition(e.target.value)}
           />
         </div>
 
         <div className="mb-4">
-          <Label
-            htmlFor={`startDate-${++formId}`}
-            className="block font-medium text-md"
-          >
+          <Label htmlFor="startDate" className="block font-medium text-md">
             Start Date:
           </Label>
           <Popover>
@@ -139,10 +229,7 @@ const ExperienceForm = ({ formId }: { formId: number }) => {
           </Popover>
         </div>
         <div className="mb-4">
-          <Label
-            htmlFor={`endDate-${++formId}`}
-            className="block font-medium text-md"
-          >
+          <Label htmlFor="endDate" className="block font-medium text-md">
             End Date:
           </Label>
           <Popover>
@@ -260,15 +347,28 @@ const ExperienceForm = ({ formId }: { formId: number }) => {
             className="mt-1 p-2 w-full border rounded-md shadow-sm h-8"
             placeholder="Enter location"
             required
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
           />
         </div>
       </div>
       <div className="flex items-center gap-2">
-        <Button type="submit" size="lg">
-          Save
+        <Button
+          type="submit"
+          size="lg"
+          onClick={handleSubmit}
+          disabled={loading}
+        >
+          {experienceFormData._id ? "Update" : "Save"}
+          {loading && <Loader className="ml-2 animate-spin" />}
         </Button>
+        {experienceFormData._id && (
+          <Button size="lg" variant="destructive" onClick={handleDelete}>
+            Delete
+          </Button>
+        )}
       </div>
-    </form>
+    </>
   );
 };
 

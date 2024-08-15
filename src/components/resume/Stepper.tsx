@@ -3,10 +3,8 @@
 import {
   Box,
   BriefcaseBusiness,
-  Building,
   ClipboardPenLine,
   Gitlab,
-  Star,
   User,
 } from "lucide-react";
 
@@ -31,8 +29,8 @@ export default function StepperExamples() {
           return (
             <Step key={stepProps.label} {...stepProps}>
               <div className="p-6 border rounded-md ">
-                {index === 0 && <BasicUserDetailForm />}
-                {index === 1 && <ExperienceLayout />}
+                {index === 1 && <BasicUserDetailForm />}
+                {index === 0 && <ExperienceLayout />}
               </div>
             </Step>
           );
