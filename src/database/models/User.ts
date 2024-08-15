@@ -16,13 +16,32 @@ const UserSchema = new Schema<UserDocument>(
       type: String,
       required: true,
     },
-    name: {
+    firstName: {
       type: String,
-      required: [true, "Name is required"],
+      required: [true, "First Name is required"],
+    },
+    lastName: {
+      type: String,
+      required: [true, "Last Name is required"],
     },
     image: {
       type: String,
       default: "https://github.com/shadcn.png",
+    },
+    phoneNumber: {
+      type: String,
+      required: false,
+      default: "",
+    },
+    address: {
+      type: String,
+      required: false,
+      default: "",
+    },
+    postalCode: {
+      type: String,
+      required: false,
+      default: "",
     },
   },
   {

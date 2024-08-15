@@ -13,7 +13,7 @@ import {
 import { Step, type StepItem, Stepper } from "@/components/ui/stepper";
 import StepperFooter from "./StepperFooter";
 import BasicUserDetailForm from "./BasicUserDetailForm";
-import ExperienceForm from "./ExperienceForm";
+import ExperienceLayout from "./ExperienceLayout";
 
 const steps = [
   { label: "User Details", icon: User },
@@ -32,7 +32,7 @@ export default function StepperExamples() {
             <Step key={stepProps.label} {...stepProps}>
               <div className="p-6 border rounded-md ">
                 {index === 0 && <BasicUserDetailForm />}
-                {index === 1 && <ExperienceForm />}
+                {index === 1 && <ExperienceLayout />}
               </div>
             </Step>
           );

@@ -11,16 +11,22 @@ import { signIn } from "next-auth/react";
 export const RegisterForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [error, setError] = useState("");
   const [Loading, setLoading] = useState(false);
   const handleSubmit = async () => {
     setError("");
     setLoading(true);
+    if (!email || !password || !firstName || !lastName) {
+      setError("Please provide all required fields");
+      return;
+    }
     const formData = new FormData();
     formData.append("email", email);
     formData.append("password", password);
-    formData.append("name", name);
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
     try {
       const res: ResponseType = await register(formData);
       if (!res.success) {
@@ -46,12 +52,23 @@ export const RegisterForm = () => {
         <div className="flex flex-col space-y-1.5">
           <Label htmlFor="name">Full Name</Label>
           <Input
-            id="name"
+            id="firstName"
             type="text"
-            name="name"
-            placeholder="Enter your full name"
-            defaultValue={name}
-            onChange={(e) => setName(e.target.value)}
+            name="firstName"
+            placeholder="Enter your first name"
+            defaultValue={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+        </div>
+        <div className="flex flex-col space-y-1.5">
+          <Label htmlFor="name">Full Name</Label>
+          <Input
+            id="lastName"
+            type="text"
+            name="lastName"
+            placeholder="Enter your Last name"
+            defaultValue={lastName}
+            onChange={(e) => setLastName(e.target.value)}
           />
         </div>
         <div className="flex flex-col space-y-1.5">

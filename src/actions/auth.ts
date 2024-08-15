@@ -6,8 +6,9 @@ import bcrypt from "bcryptjs";
 export const register = async (formData: FormData) => {
   const email = formData.get("email");
   const password = formData.get("password") as string;
-  const name = formData.get("name");
-  if (!email || !password || !name) {
+  const firstName = formData.get("firstName") as string;
+  const lastName = formData.get("lastName") as string;
+  if (!email || !password || !firstName || !lastName) {
     return {
       success: false,
       message: "Please provide both email and password and Name !",
@@ -25,7 +26,8 @@ export const register = async (formData: FormData) => {
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({
-      name,
+      firstName,
+      lastName,
       email,
       password: hashedPassword,
     });
