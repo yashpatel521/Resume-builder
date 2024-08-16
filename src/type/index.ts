@@ -56,6 +56,20 @@ export interface EducationDocument {
   updatedAt: Date;
 }
 
+export interface ProjectDocument {
+  title: string;
+  description: string;
+  technologies: string[];
+  url: string;
+  screenshot: string;
+  startDate: Date;
+  endDate: Date;
+  userId: string;
+  formNumber: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface Project {
   title: string;
   description: string;
@@ -119,6 +133,19 @@ export interface educationFormType {
   degree: string;
   startDate: Date;
   endDate: Date;
+  userId: string;
+  formNumber: number;
+}
+
+export interface projectFormType {
+  _id: string;
+  title: string;
+  description: string;
+  technologies: string[];
+  url: string;
+  startDate: Date;
+  endDate: Date;
+  screenshot: string;
   userId: string;
   formNumber: number;
 }
