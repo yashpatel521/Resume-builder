@@ -63,14 +63,9 @@ const ExperienceLayout = () => {
     setForms([...forms, newForm]);
   };
 
-  // const handleDeleteExperience = (id: string) => {
-  //   setForms(forms.filter((form) => form._id !== id));
-  // };
-
-  const handleUpdateExperience = (updatedData: experienceFormType) => {
-    // setForms(
-    //   // forms.map((form) => (form._id === updatedData._id ? updatedData : form))
-    // );
+  const handleDeleteExperience = (formId: string) => {
+    const updatedForms = forms.filter((form) => form._id !== formId);
+    setForms(updatedForms);
   };
 
   return (
@@ -85,7 +80,11 @@ const ExperienceLayout = () => {
         </Button>
       </div>
       {forms.map((form) => (
-        <ExperienceForm experienceFormData={form} key={form.formNumber} />
+        <ExperienceForm
+          experienceFormData={form}
+          key={form.formNumber}
+          handleDeleteExperience={handleDeleteExperience}
+        />
       ))}
     </div>
   );

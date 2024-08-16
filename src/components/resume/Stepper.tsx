@@ -12,6 +12,7 @@ import { Step, type StepItem, Stepper } from "@/components/ui/stepper";
 import StepperFooter from "./StepperFooter";
 import BasicUserDetailForm from "./BasicUserDetailForm";
 import ExperienceLayout from "./ExperienceLayout";
+import EducationLayout from "./EducationLayout";
 
 const steps = [
   { label: "User Details", icon: User },
@@ -29,8 +30,9 @@ export default function StepperExamples() {
           return (
             <Step key={stepProps.label} {...stepProps}>
               <div className="p-6 border rounded-md ">
-                {index === 1 && <BasicUserDetailForm />}
-                {index === 0 && <ExperienceLayout />}
+                {index === 2 && <BasicUserDetailForm />}
+                {index === 1 && <ExperienceLayout />}
+                {index === 0 && <EducationLayout />}
               </div>
             </Step>
           );

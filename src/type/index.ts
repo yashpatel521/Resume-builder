@@ -39,9 +39,20 @@ export interface ExperienceDocument {
   location: string;
   responsibilities: string[];
   projects: string[];
-  createdAt: Date;
   userId: string;
   formNumber: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface EducationDocument {
+  institution: string;
+  degree: string;
+  startDate: Date;
+  endDate: Date;
+  userId: string;
+  formNumber: number;
+  createdAt: Date;
   updatedAt: Date;
 }
 
@@ -98,6 +109,16 @@ export interface experienceFormType {
   location: string;
   responsibilities: string[];
   projects: string[];
+  userId: string;
+  formNumber: number;
+}
+
+export interface educationFormType {
+  _id: "";
+  institution: string;
+  degree: string;
+  startDate: Date;
+  endDate: Date;
   userId: string;
   formNumber: number;
 }

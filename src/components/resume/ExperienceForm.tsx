@@ -21,14 +21,14 @@ import {
 import axios from "axios";
 import { toast } from "../ui/use-toast";
 import { experienceFormType } from "@/type";
-import { useRouter } from "next/navigation";
 
 const ExperienceForm = ({
   experienceFormData,
+  handleDeleteExperience,
 }: {
   experienceFormData: experienceFormType;
+  handleDeleteExperience: (id: string) => void;
 }) => {
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [companyName, setCompanyName] = useState(experienceFormData.company);
   const [position, setPosition] = useState(experienceFormData.position);
@@ -123,7 +123,6 @@ const ExperienceForm = ({
       const response = await axios.post("/api/experience", formData);
       const data = response.data;
       if (data.success) {
-        router.prefetch("/resume");
         toast({
           title: "Experience Saved",
           description: "Your experience has been successfully saved!",
@@ -145,7 +144,7 @@ const ExperienceForm = ({
     );
     const data = response.data;
     if (data.success) {
-      router.prefetch("/resume");
+      handleDeleteExperience(experienceFormData._id);
       toast({
         title: "Experience Deleted",
         description: "Your experience has been successfully deleted!",
