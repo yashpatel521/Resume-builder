@@ -11,7 +11,9 @@ const HeaderResume = ({ userData }: { userData: UserDocument }) => {
               {userData?.firstName || "First Name"}{" "}
               {userData?.lastName || "Last Name"}
             </h1>
-            <p className="text-sm text-gray-700">{"Software Engineer"}</p>
+            <p className="text-sm text-gray-700">
+              {userData.majorSkill || "Software Engineer"}
+            </p>
           </div>
         </div>
         <div className="grid gap-1 text-right">

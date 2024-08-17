@@ -24,9 +24,10 @@ const UserSchema = new Schema<UserDocument>(
       type: String,
       required: [true, "Last Name is required"],
     },
-    image: {
+    majorSkill: {
       type: String,
-      default: "https://github.com/shadcn.png",
+      required: false,
+      default: "",
     },
     phoneNumber: {
       type: String,

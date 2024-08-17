@@ -10,8 +10,8 @@ export interface UserDocument {
   password: string;
   firstName: string;
   lastName: string;
+  majorSkill: string;
   phoneNumber: string;
-  image: string;
   address: string;
   postalCode: string;
   createdAt: Date;
@@ -77,6 +77,18 @@ export interface SkillsDocument {
 export interface Skill {
   name: string;
   proficiency: string;
+}
+
+export interface userFromType {
+  _id: string;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  majorSkill: string;
+  phoneNumber: string;
+  address: string;
+  postalCode: string;
 }
 
 export interface experienceFormType {

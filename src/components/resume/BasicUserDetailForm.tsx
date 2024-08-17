@@ -4,12 +4,12 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { useSession } from "next-auth/react";
-import { ResponseType } from "@/type";
+import { ResponseType, userFromType } from "@/type";
 
 const BasicUserDetailForm = () => {
   const { data: session } = useSession();
 
-  const [userData, setUserData] = useState({
+  const [userData, setUserData] = useState<userFromType>({
     _id: "",
     firstName: "",
     lastName: "",
@@ -17,6 +17,8 @@ const BasicUserDetailForm = () => {
     address: "",
     phoneNumber: "",
     postalCode: "",
+    majorSkill: "",
+    password: "",
   });
 
   const [initialData, setInitialData] = useState({ ...userData }); // Store initial data
@@ -132,6 +134,21 @@ const BasicUserDetailForm = () => {
             placeholder="Enter email address"
             required
             value={userData.email}
+            onChange={onChangeFields}
+          />
+        </div>
+        <div className="mb-4">
+          <Label htmlFor="majorSkill" className="block font-medium text-md">
+            Major Skill :
+          </Label>
+          <Input
+            type="text"
+            id="majorSkill"
+            name="majorSkill"
+            className="mt-1 p-2 w-full border rounded-md shadow-sm h-8"
+            placeholder="Enter major skill"
+            required
+            value={userData.majorSkill}
             onChange={onChangeFields}
           />
         </div>
