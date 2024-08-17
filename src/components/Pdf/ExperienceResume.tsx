@@ -1,3 +1,4 @@
+import { formatDateToMonthYear } from "@/lib/utils";
 import { ExperienceDocument } from "@/type";
 import React from "react";
 
@@ -7,45 +8,31 @@ const ExperienceComponent = ({
   experience: ExperienceDocument;
 }) => {
   return (
-    <div className="mb-8 border-b border-gray-300 my-4">
-      <h2 className="text-2xl font-bold mb-1">
-        {experience.company}
-        <span className="text-xs text-muted-foreground ml-3">
-          ({new Date(experience.startDate).toLocaleDateString()} -{" "}
-          {experience.endDate
-            ? new Date(experience.endDate).toLocaleDateString()
-            : "Present"}
-          )
-        </span>
-      </h2>
-      <p className="text-sm font-semibold mb-1 ml-20 text-gray-500">
-        - {experience.position} | {experience.location}
-      </p>
-      <div className="flex gap-20 ml-10">
-        <div className="mb-3">
-          <h3 className="text-lg font-semibold mb-1">Responsibilities:</h3>
-          <ul className="list-disc pl-5 text-sm text-gray-800">
-            {experience.responsibilities.map((responsibility, idx) => (
-              <li key={idx} className="mb-1">
-                {responsibility}
-              </li>
-            ))}
-          </ul>
+    <section className="mb-2">
+      <div className="grid gap-8">
+        <div>
+          <h3 className="text-lg font-semibold text-black">
+            {experience.company}
+            <span className="text-xs text-gray-600 ml-2">
+              ({experience.position})
+            </span>
+          </h3>
+
+          <p className="text-sm text-gray-700">
+            {experience.location} |{" "}
+            {formatDateToMonthYear(experience.startDate)} -{" "}
+            {formatDateToMonthYear(experience.endDate)}
+          </p>
+          <p className="text-sm text-black">
+            Developed and maintained web applications using React, Node.js, and
+            MongoDB. Collaborated with cross-functional teams to deliver
+            high-quality software solutions. Implemented new features and
+            optimized existing systems to improve performance and user
+            experience.
+          </p>
         </div>
-        {experience.projects.length > 0 && (
-          <div>
-            <h3 className="text-lg font-semibold mb-1">Projects:</h3>
-            <ul className="list-disc pl-5 text-sm text-gray-800">
-              {experience.projects.map((project, idx) => (
-                <li key={idx} className="mb-1">
-                  {project}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
       </div>
-    </div>
+    </section>
   );
 };
 

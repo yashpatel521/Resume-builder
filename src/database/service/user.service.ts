@@ -51,7 +51,7 @@ export async function getAllDataByUserId(id: string) {
   return {
     user: userData,
     experiences: experienceData,
-    education: educationData,
+    educations: educationData,
     projects: projectData,
     skills: skillsData,
   };

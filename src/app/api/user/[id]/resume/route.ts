@@ -12,7 +12,6 @@ export async function GET(
 ) {
   try {
     const user = await getAllDataByUserId(params.id);
-    // console.log(user);
 
     return NextResponse.json({ success: true, data: user });
   } catch (error: any) {
