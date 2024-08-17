@@ -25,10 +25,13 @@ import { experienceFormType } from "@/type";
 const ExperienceForm = ({
   experienceFormData,
   handleDeleteExperience,
+  setUpdateNumber,
 }: {
   experienceFormData: experienceFormType;
   handleDeleteExperience: (id: string) => void;
+  setUpdateNumber: (prev: (prev: number) => number) => void;
 }) => {
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [companyName, setCompanyName] = useState(experienceFormData.company);
   const [position, setPosition] = useState(experienceFormData.position);
@@ -86,6 +89,23 @@ const ExperienceForm = ({
 
   const handleSubmit = async () => {
     setLoading(true);
+    setError("");
+
+    if (
+      !companyName ||
+      !position ||
+      !startDate ||
+      !endDate ||
+      !location ||
+      projects.some((project) => !project) ||
+      responsibilities.some((responsibility) => !responsibility)
+    ) {
+      setError("Please make sure all fields are filled out correctly!");
+
+      setLoading(false);
+      return;
+    }
+
     const formData = {
       _id: experienceFormData._id,
       userId: experienceFormData.userId,
@@ -123,6 +143,7 @@ const ExperienceForm = ({
       const response = await axios.post("/api/experience", formData);
       const data = response.data;
       if (data.success) {
+        setUpdateNumber((prev: number) => prev + 1);
         toast({
           title: "Experience Saved",
           description: "Your experience has been successfully saved!",
@@ -164,6 +185,7 @@ const ExperienceForm = ({
         Form Experience {experienceFormData.formNumber}
       </h1>
       <hr className="w-1/2 m-auto my-2" />
+      {error && <div className="text-red-500 text-sm text-center">{error}</div>}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
         <div className="mb-4">
           <Label htmlFor="companyName" className="block font-medium text-md">

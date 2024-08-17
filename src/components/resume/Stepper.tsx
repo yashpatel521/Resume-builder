@@ -8,7 +8,12 @@ import {
   User,
 } from "lucide-react";
 
-import { Step, type StepItem, Stepper } from "@/components/ui/stepper";
+import {
+  Step,
+  type StepItem,
+  Stepper,
+  useStepper,
+} from "@/components/ui/stepper";
 import StepperFooter from "./StepperFooter";
 import BasicUserDetailForm from "./BasicUserDetailForm";
 import ExperienceLayout from "./ExperienceLayout";
@@ -25,9 +30,16 @@ const steps = [
 ] satisfies StepItem[];
 
 export default function StepperExamples() {
+  const { hasCompletedAllSteps } = useStepper();
   return (
     <div className="flex w-full flex-col gap-4">
-      <Stepper initialStep={0} steps={steps}>
+      <Stepper
+        initialStep={0}
+        steps={steps}
+        onClickStep={(step, setStep) => {
+          setStep(step);
+        }}
+      >
         {steps.map((stepProps, index) => {
           return (
             <Step key={stepProps.label} {...stepProps}>

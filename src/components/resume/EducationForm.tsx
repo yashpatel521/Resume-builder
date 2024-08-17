@@ -34,6 +34,12 @@ const EducationForm = ({
   const handleSubmit = async () => {
     setError("");
     setLoading(true);
+    if (!institution || !degree || !startDate || !endDate) {
+      setError("Please fill all the fields");
+      setLoading(false);
+      return;
+    }
+
     const formData = {
       _id: educationFormData._id,
       userId: educationFormData.userId,
@@ -125,6 +131,7 @@ const EducationForm = ({
       <h1 className="text-center text-accent-foreground text-2xl">
         Education Form {educationFormData.formNumber}
       </h1>
+      {error && <div className="text-red-500 text-sm text-center">{error}</div>}
       <hr className="w-1/2 m-auto my-2" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
         <div className="mb-4">

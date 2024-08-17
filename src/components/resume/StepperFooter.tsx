@@ -1,5 +1,6 @@
 import { useStepper } from "@/components/ui/stepper";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 const StepperFooter = () => {
   const {
     nextStep,
@@ -12,11 +13,6 @@ const StepperFooter = () => {
   } = useStepper();
   return (
     <>
-      {hasCompletedAllSteps && (
-        <div className="h-40 flex items-center justify-center my-2 border bg-secondary text-primary rounded-md">
-          <h1 className="text-xl">Woohoo! All steps completed! 🎉</h1>
-        </div>
-      )}
       <div className="w-full flex justify-end gap-2">
         {hasCompletedAllSteps ? (
           <Button size="sm" onClick={resetSteps}>
@@ -33,7 +29,13 @@ const StepperFooter = () => {
               Prev
             </Button>
             <Button size="sm" onClick={nextStep}>
-              {isLastStep ? "Finish" : isOptionalStep ? "Skip" : "Next"}
+              {isLastStep ? (
+                <Link href="/resume/preview">Preview Resume</Link>
+              ) : isOptionalStep ? (
+                "Skip"
+              ) : (
+                "Next"
+              )}
             </Button>
           </>
         )}

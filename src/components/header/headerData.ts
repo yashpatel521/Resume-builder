@@ -7,8 +7,8 @@ const navItems: NavItemType[] = [
     icon: "HomeIcon",
   },
   {
-    title: "Features",
-    href: "/resume/features",
+    title: "Preview",
+    href: "/resume/Preview",
     icon: "InfoIcon",
   },
   {

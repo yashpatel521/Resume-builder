@@ -71,7 +71,7 @@ const ProjectLayout = () => {
     <div>
       <div className="flex justify-end">
         <Button variant="secondary" className="mb-2" onClick={handleAddProject}>
-          Add Experience
+          Add New Project
         </Button>
       </div>
       {loading ? (

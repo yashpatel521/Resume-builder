@@ -6,6 +6,7 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import axios from "axios";
 import { toast } from "../ui/use-toast";
+import { Loader } from "lucide-react";
 
 const SkillsLayout = () => {
   const { data: session } = useSession();
@@ -15,8 +16,11 @@ const SkillsLayout = () => {
   const [formId, setFormId] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [fetching, setFetching] = useState(true); // Add a state for initial data fetching
+
   useEffect(() => {
     const fetchData = async () => {
+      setFetching(true);
       try {
         const response = await axios.get(
           `/api/skills/user/${session?.user._id}`
@@ -39,6 +43,8 @@ const SkillsLayout = () => {
           variant: "destructive",
         });
         console.error("Failed to fetch experiences:", error);
+      } finally {
+        setFetching(false); // Turn off the fetching loader
       }
     };
 
@@ -111,8 +117,9 @@ const SkillsLayout = () => {
         description: "An error occurred while saving your skills.",
         variant: "destructive",
       });
+    } finally {
+      setLoading(false); // Turn off the saving/updating loader
     }
-    setLoading(false);
   };
 
   return (
@@ -121,77 +128,86 @@ const SkillsLayout = () => {
         <h1 className="text-xl font-bold mb-4">Skills</h1>
         <div className="flex justify-end gap-2">
           {formId ? (
-            <Button className="mb-2" onClick={handleSubmit}>
-              {loading ? "Updateing..." : "Update"}
+            <Button className="mb-2" onClick={handleSubmit} disabled={loading}>
+              {loading ? "Updating..." : "Update"}
+              {loading && <Loader size="sm" className="ml-2" />}
             </Button>
           ) : (
-            <Button className="mb-2" onClick={handleSubmit}>
-              {loading ? "Saving..." : "Save"}{" "}
+            <Button className="mb-2" onClick={handleSubmit} disabled={loading}>
+              {loading ? "Saving..." : "Save"}
+              {loading && <Loader size="sm" className="ml-2" />}{" "}
             </Button>
           )}
           <Button
             variant="secondary"
             className="mb-2"
             onClick={handleAddSkills}
+            disabled={loading}
           >
             Add Skill
           </Button>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
-        {forms.map((form, index) => (
-          <React.Fragment key={index}>
-            <div className="mb-4">
-              <Label className="block font-medium text-md">
-                Name {index + 1}:
-              </Label>
-              <Input
-                className="w-full border rounded-md shadow-sm"
-                type="text"
-                placeholder="Skill Name"
-                value={form.name}
-                onChange={(e) => {
-                  setForms(
-                    forms.map((skill, i) =>
-                      i === index ? { ...skill, name: e.target.value } : skill
-                    )
-                  );
-                }}
-              />
-            </div>
-            <div className="mb-4">
-              <Label className="block font-medium text-md">
-                Proficiency {index + 1}:
-              </Label>
-              <Input
-                className="w-full border rounded-md shadow-sm"
-                type="text"
-                placeholder="Proficiency"
-                value={form.proficiency}
-                onChange={(e) => {
-                  setForms(
-                    forms.map((skill, i) =>
-                      i === index
-                        ? { ...skill, proficiency: e.target.value }
-                        : skill
-                    )
-                  );
-                }}
-              />
-            </div>
-            {forms.length > 1 && (
-              <Button
-                variant="destructive"
-                // size="sm"
-                className="mt-2"
-                onClick={() => handleDeleteSkill(index)}
-              >
-                Delete
-              </Button>
-            )}
-          </React.Fragment>
-        ))}
-      </div>
+      {fetching ? ( // Show loader while fetching data
+        <div className="flex justify-center items-center h-40">
+          <Loader className="w-24 h-24 animate-spin" />
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+          {forms.map((form, index) => (
+            <React.Fragment key={index}>
+              <div className="mb-4">
+                <Label className="block font-medium text-md">
+                  Name {index + 1}:
+                </Label>
+                <Input
+                  className="w-full border rounded-md shadow-sm"
+                  type="text"
+                  placeholder="Skill Name"
+                  value={form.name}
+                  onChange={(e) => {
+                    setForms(
+                      forms.map((skill, i) =>
+                        i === index ? { ...skill, name: e.target.value } : skill
+                      )
+                    );
+                  }}
+                />
+              </div>
+              <div className="mb-4">
+                <Label className="block font-medium text-md">
+                  Proficiency {index + 1}:
+                </Label>
+                <Input
+                  className="w-full border rounded-md shadow-sm"
+                  type="text"
+                  placeholder="Proficiency"
+                  value={form.proficiency}
+                  onChange={(e) => {
+                    setForms(
+                      forms.map((skill, i) =>
+                        i === index
+                          ? { ...skill, proficiency: e.target.value }
+                          : skill
+                      )
+                    );
+                  }}
+                />
+              </div>
+              {forms.length > 1 && (
+                <Button
+                  variant="destructive"
+                  className="mt-2"
+                  onClick={() => handleDeleteSkill(index)}
+                  disabled={loading} // Disable delete button during saving/updating
+                >
+                  Delete
+                </Button>
+              )}
+            </React.Fragment>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

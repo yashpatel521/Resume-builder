@@ -11,6 +11,7 @@ import { toast } from "../ui/use-toast";
 const ExperienceLayout = () => {
   const { data: session } = useSession();
   const [forms, setForms] = useState<experienceFormType[]>([]);
+  const [updateNumber, setUpdateNumber] = useState<number>(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,7 +42,7 @@ const ExperienceLayout = () => {
     if (session?.user._id) {
       fetchData();
     }
-  }, [session?.user._id]);
+  }, [session?.user._id, updateNumber]);
 
   const handleAddExperience = () => {
     const newForm: experienceFormType = {
@@ -84,6 +85,7 @@ const ExperienceLayout = () => {
           experienceFormData={form}
           key={form.formNumber}
           handleDeleteExperience={handleDeleteExperience}
+          setUpdateNumber={setUpdateNumber}
         />
       ))}
     </div>
