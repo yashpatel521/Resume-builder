@@ -23,13 +23,7 @@ const ExperienceComponent = ({
             {formatDateToMonthYear(experience.startDate)} -{" "}
             {formatDateToMonthYear(experience.endDate)}
           </p>
-          <p className="text-sm text-black">
-            Developed and maintained web applications using React, Node.js, and
-            MongoDB. Collaborated with cross-functional teams to deliver
-            high-quality software solutions. Implemented new features and
-            optimized existing systems to improve performance and user
-            experience.
-          </p>
+          <p className="text-sm text-black">{experience.description}</p>
         </div>
       </div>
     </section>

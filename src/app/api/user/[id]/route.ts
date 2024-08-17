@@ -56,8 +56,6 @@ export async function POST(
     user.address = bodyData.address || user.address;
     user.postalCode = bodyData.postalCode || user.postalCode;
     user.majorSkill = bodyData.majorSkill || user.majorSkill;
-    console.log(bodyData.majorSkill);
-    console.log(user.majorSkill);
     await updateUserById(params.id, user);
 
     return NextResponse.json({ success: true, data: user });

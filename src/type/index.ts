@@ -33,6 +33,7 @@ export interface ExperienceDocument {
   location: string;
   responsibilities: string[];
   projects: string[];
+  description: string;
   userId: string;
   formNumber: number;
   createdAt: Date;
@@ -102,6 +103,7 @@ export interface experienceFormType {
   projects: string[];
   userId: string;
   formNumber: number;
+  description: string;
 }
 
 export interface educationFormType {

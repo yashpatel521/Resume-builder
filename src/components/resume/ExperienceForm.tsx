@@ -21,6 +21,7 @@ import {
 import axios from "axios";
 import { toast } from "../ui/use-toast";
 import { experienceFormType } from "@/type";
+import { Textarea } from "../ui/textarea";
 
 const ExperienceForm = ({
   experienceFormData,
@@ -48,7 +49,9 @@ const ExperienceForm = ({
     experienceFormData.responsibilities
   );
   const [location, setLocation] = useState(experienceFormData.location);
-
+  const [description, setDescription] = useState(
+    experienceFormData.description
+  );
   // Functions for managing projects
   const handleAddProject = () => {
     setProjects([...projects, ""]);
@@ -115,6 +118,7 @@ const ExperienceForm = ({
       startDate,
       endDate,
       location,
+      description,
       responsibilities,
       projects,
     };
@@ -370,6 +374,20 @@ const ExperienceForm = ({
             required
             value={location}
             onChange={(e) => setLocation(e.target.value)}
+          />
+        </div>
+        <div className="mb-4 col-span-2">
+          <Label htmlFor="description" className="block font-medium text-md">
+            Description:
+          </Label>
+          <Textarea
+            id="description"
+            name="description"
+            className="mt-1 p-2 w-full border rounded-md shadow-sm h-32"
+            placeholder="Enter description"
+            required
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
         </div>
       </div>

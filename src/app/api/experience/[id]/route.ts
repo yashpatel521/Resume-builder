@@ -4,8 +4,6 @@ import {
 } from "@/database/service/experience.service";
 import { NextRequest, NextResponse } from "next/server";
 
-// delete route
-
 export async function DELETE(
   req: NextRequest,
 

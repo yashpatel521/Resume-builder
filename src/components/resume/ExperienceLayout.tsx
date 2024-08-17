@@ -45,10 +45,12 @@ const ExperienceLayout = () => {
   }, [session?.user._id, updateNumber]);
 
   const handleAddExperience = () => {
+    const counter =
+      forms.length > 0 ? forms[forms.length - 1].formNumber + 1 : 1;
     const newForm: experienceFormType = {
       _id: "",
       userId: session?.user._id,
-      formNumber: forms[forms.length - 1].formNumber + 1,
+      formNumber: counter,
       company: "Temp Company",
       startDate: new Date(),
       endDate: new Date(),
@@ -60,6 +62,8 @@ const ExperienceLayout = () => {
         "Temp Responsibility 3",
       ],
       projects: ["Temp Project 1", "Temp Project 2", "Temp Project 3"],
+      description:
+        "Developed and maintained web applications using React, Node.js, and MongoDB. Collaborated with cross-functional teams to deliver high-quality software solutions. Implemented new features and optimized existing systems to improve performance and user experience.",
     };
     setForms([...forms, newForm]);
   };
