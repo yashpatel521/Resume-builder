@@ -126,7 +126,6 @@ export interface projectFormType {
   url: string;
   startDate: Date;
   endDate: Date;
-  screenshot: string;
   userId: string;
   formNumber: number;
 }

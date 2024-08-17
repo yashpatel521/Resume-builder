@@ -7,7 +7,6 @@ const ProjectSchema = new Schema<ProjectDocument>(
     description: { type: String, required: true },
     technologies: { type: [String], required: true },
     url: { type: String, required: false, default: "" },
-    screenshot: { type: String, required: false, default: "" },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
     userId: { type: String, required: true },

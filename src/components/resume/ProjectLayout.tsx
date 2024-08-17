@@ -57,7 +57,6 @@ const ProjectLayout = () => {
       endDate: new Date(),
       technologies: ["Nextjs", "NestJs", "mongoDB"],
       url: "https://github.com/yashpatel521/nextjs-blog",
-      screenshot: "https://github.com/shadcn.png",
     };
     setForms([...forms, newForm]);
   };

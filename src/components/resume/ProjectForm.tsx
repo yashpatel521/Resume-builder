@@ -31,7 +31,6 @@ const ProjectForm = ({
     projectFormData.endDate
   );
   const [url, setUrl] = useState(projectFormData.url);
-  const [screenshot, setScreenshot] = useState(projectFormData.screenshot);
   const [technologies, setTechnologies] = useState<string[]>(
     projectFormData.technologies
   );
@@ -58,7 +57,6 @@ const ProjectForm = ({
       startDate,
       endDate,
       url,
-      screenshot,
       technologies,
       userId: projectFormData.userId,
       formNumber: projectFormData.formNumber,
@@ -122,7 +120,7 @@ const ProjectForm = ({
   };
 
   return (
-    <div>
+    <div className="border-t-2 mt-2">
       <h1 className="text-center text-accent-foreground text-2xl">
         Project Form {projectFormData.formNumber}
       </h1>
@@ -144,6 +142,21 @@ const ProjectForm = ({
           />
         </div>
 
+        <div className="mb-4">
+          <Label htmlFor="url" className="block font-medium text-md">
+            URL:
+          </Label>
+          <Input
+            type="url"
+            id="url"
+            name="url"
+            className=" w-full border rounded-md shadow-sm"
+            placeholder="Enter Project URL"
+            required
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+          />
+        </div>
         <div className="mb-4">
           <Label htmlFor="startDate" className="block font-medium text-md">
             Start Date:
@@ -201,35 +214,6 @@ const ProjectForm = ({
               />
             </PopoverContent>
           </Popover>
-        </div>
-        <div className="mb-4">
-          <Label htmlFor="url" className="block font-medium text-md">
-            URL:
-          </Label>
-          <Input
-            type="url"
-            id="url"
-            name="url"
-            className=" w-full border rounded-md shadow-sm"
-            placeholder="Enter Project URL"
-            required
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-          />
-        </div>
-        <div className="mb-4">
-          <Label htmlFor="screenshot" className="block font-medium text-md">
-            Screenshot URL:
-          </Label>
-          <Input
-            type="text"
-            id="screenshot"
-            name="screenshot"
-            className=" w-full border rounded-md shadow-sm"
-            placeholder="Enter Screenshot URL"
-            value={screenshot}
-            onChange={(e) => setScreenshot(e.target.value)}
-          />
         </div>
         <div className="mb-4">
           <Label htmlFor="technologies" className="block font-medium text-md">
