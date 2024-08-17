@@ -19,11 +19,7 @@ const EducationResume = ({
             {formatDateToMonthYear(educationData.startDate)} -{" "}
             {formatDateToMonthYear(educationData.endDate)}
           </p>
-          <p className="text-sm text-black">
-            Graduated with a 3.8 GPA, Dean's List, and Cum Laude honors.
-            Participated in various hackathons and coding competitions, winning
-            several awards.
-          </p>
+          <p className="text-sm text-black">{educationData.description}</p>
         </div>
       </div>
     </section>

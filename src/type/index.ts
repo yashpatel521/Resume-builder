@@ -46,6 +46,7 @@ export interface EducationDocument {
   degree: string;
   startDate: Date;
   endDate: Date;
+  description: string;
   userId: string;
   formNumber: number;
   createdAt: Date;
@@ -114,6 +115,7 @@ export interface educationFormType {
   endDate: Date;
   userId: string;
   formNumber: number;
+  description: string;
 }
 
 export interface projectFormType {

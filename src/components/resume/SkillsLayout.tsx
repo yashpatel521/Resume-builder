@@ -1,4 +1,4 @@
-import { Skills } from "@/type";
+import { Skill } from "@/type";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import { Button } from "../ui/button";
@@ -10,7 +10,7 @@ import { Loader } from "lucide-react";
 
 const SkillsLayout = () => {
   const { data: session } = useSession();
-  const [forms, setForms] = useState<Skills[]>([
+  const [forms, setForms] = useState<Skill[]>([
     { name: "Temp", proficiency: "Low" },
   ]);
   const [formId, setFormId] = useState("");

@@ -9,6 +9,7 @@ const EducationSchema = new Schema<EducationDocument>(
     endDate: { type: Date, required: true },
     userId: { type: String, required: true },
     formNumber: { type: Number, required: true },
+    description: { type: String, required: true },
   },
   {
     timestamps: true,

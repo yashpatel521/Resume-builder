@@ -10,6 +10,7 @@ import { Calendar } from "../ui/calendar";
 import { format } from "date-fns";
 import axios from "axios";
 import { toast } from "../ui/use-toast";
+import { Textarea } from "../ui/textarea";
 
 const EducationForm = ({
   educationFormData,
@@ -29,6 +30,7 @@ const EducationForm = ({
   const [endDate, setEndDate] = useState<Date | undefined>(
     educationFormData.endDate
   );
+  const [description, setDescription] = useState(educationFormData.description);
   const [error, setError] = useState("");
 
   const handleSubmit = async () => {
@@ -47,6 +49,7 @@ const EducationForm = ({
       degree,
       startDate,
       endDate,
+      description,
       formNumber: educationFormData.formNumber,
     };
 
@@ -224,6 +227,19 @@ const EducationForm = ({
               />
             </PopoverContent>
           </Popover>
+        </div>
+        <div className="mb-4 col-span-2">
+          <Label htmlFor="description" className="block font-medium text-md">
+            Description:
+          </Label>
+          <Textarea
+            id="description"
+            name="description"
+            className="mt-1 p-2 w-full border rounded-md shadow-sm h-32"
+            placeholder="Enter Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
         </div>
       </div>
       <div className="flex items-center gap-2">

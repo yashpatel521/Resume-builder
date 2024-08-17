@@ -55,6 +55,7 @@ const EducationLayout = () => {
       degree: "",
       startDate: new Date(),
       endDate: new Date(),
+      description: "",
     };
     setForms([...forms, newForm]);
   };
