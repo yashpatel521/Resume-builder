@@ -14,7 +14,7 @@ const SkillsResume = ({ skillsData }: { skillsData: SkillsDocument }) => {
                 <div className="w-1/2 bg-gray-200 rounded-full h-2">
                   <div
                     className="bg-black h-2 rounded-full"
-                    style={{ width: `${skill.proficiency}%` }}
+                    style={{ width: `${skill.percentage}%` }}
                   />
                 </div>
                 <span>{skill.proficiency}%</span>

@@ -79,6 +79,7 @@ export interface SkillsDocument {
 export interface Skill {
   name: string;
   proficiency: string;
+  percentage: number;
 }
 
 export interface userFromType {

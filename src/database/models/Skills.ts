@@ -7,6 +7,7 @@ const SkillsSchema = new Schema<SkillsDocument>(
       {
         name: { type: String, required: true },
         proficiency: { type: String, required: true },
+        percentage: { type: Number, required: true },
       },
     ],
 

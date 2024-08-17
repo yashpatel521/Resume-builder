@@ -11,7 +11,7 @@ import { Loader } from "lucide-react";
 const SkillsLayout = () => {
   const { data: session } = useSession();
   const [forms, setForms] = useState<Skill[]>([
-    { name: "Temp", proficiency: "Low" },
+    { name: "Temp", proficiency: "Low", percentage: 70 },
   ]);
   const [formId, setFormId] = useState("");
   const [error, setError] = useState("");
@@ -57,6 +57,7 @@ const SkillsLayout = () => {
     const newForm = {
       name: "NextJs",
       proficiency: "Pro",
+      percentage: 80,
     };
     setForms([...forms, newForm]);
   };
@@ -153,7 +154,7 @@ const SkillsLayout = () => {
           <Loader className="w-24 h-24 animate-spin" />
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
           {forms.map((form, index) => (
             <React.Fragment key={index}>
               <div className="mb-4">
@@ -188,6 +189,31 @@ const SkillsLayout = () => {
                       forms.map((skill, i) =>
                         i === index
                           ? { ...skill, proficiency: e.target.value }
+                          : skill
+                      )
+                    );
+                  }}
+                />
+              </div>
+              <div className="mb-4">
+                <Label className="block font-medium text-md">
+                  Percentage {index + 1}:
+                </Label>
+                <Input
+                  className="w-full border rounded-md shadow-sm"
+                  type="number"
+                  placeholder="Percentage"
+                  value={form.percentage}
+                  min={0}
+                  max={100}
+                  onChange={(e) => {
+                    setForms(
+                      forms.map((skill, i) =>
+                        i === index
+                          ? {
+                              ...skill,
+                              percentage: parseInt(e.target.value),
+                            }
                           : skill
                       )
                     );
