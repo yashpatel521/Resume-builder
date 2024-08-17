@@ -70,6 +70,13 @@ export interface ProjectDocument {
   updatedAt: Date;
 }
 
+export interface SkillsDocument {
+  skills: Skill[];
+  userId: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface Project {
   title: string;
   description: string;
@@ -148,4 +155,9 @@ export interface projectFormType {
   screenshot: string;
   userId: string;
   formNumber: number;
+}
+
+export interface Skills {
+  name: string;
+  proficiency: string;
 }

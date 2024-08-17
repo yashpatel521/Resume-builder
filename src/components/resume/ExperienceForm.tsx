@@ -173,7 +173,7 @@ const ExperienceForm = ({
             type="text"
             id="companyName"
             name="companyName"
-            className="mt-1 p-2 w-full border rounded-md shadow-sm h-8"
+            className="w-full border rounded-md shadow-sm "
             placeholder="Enter Company Name"
             required
             value={companyName}
