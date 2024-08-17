@@ -24,14 +24,8 @@ export interface NavItemType {
   icon: string;
 }
 
-export interface Education {
-  degree: string;
-  major: string;
-  institution: string;
-  graduationYear: string;
-}
-
 export interface ExperienceDocument {
+  _id: string;
   company: string;
   position: string;
   startDate: Date;
@@ -46,6 +40,7 @@ export interface ExperienceDocument {
 }
 
 export interface EducationDocument {
+  _id: string;
   institution: string;
   degree: string;
   startDate: Date;
@@ -57,6 +52,7 @@ export interface EducationDocument {
 }
 
 export interface ProjectDocument {
+  _id: string;
   title: string;
   description: string;
   technologies: string[];
@@ -71,54 +67,16 @@ export interface ProjectDocument {
 }
 
 export interface SkillsDocument {
+  _id: string;
   skills: Skill[];
   userId: string;
   createdAt: Date;
   updatedAt: Date;
 }
 
-export interface Project {
-  title: string;
-  description: string;
-  technologies: string[];
-  url: string;
-  screenshot: string;
-}
-
-export interface SocialMedia {
-  linkedIn: string;
-  github: string;
-}
-
-export interface Certification {
-  title: string;
-  institution: string;
-  date: string;
-}
-
 export interface Skill {
   name: string;
   proficiency: string;
-}
-
-export interface UserDataType {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  address: string;
-  city: string;
-  state: string;
-  zip: string;
-  education: Education[];
-  // experience: Experience[];
-  projects: Project[];
-  socialMedia: SocialMedia;
-  hobbies: string[];
-  interests: string[];
-  languages: string[];
-  certifications: Certification[];
-  skills: Skill[];
 }
 
 export interface experienceFormType {
@@ -155,9 +113,4 @@ export interface projectFormType {
   screenshot: string;
   userId: string;
   formNumber: number;
-}
-
-export interface Skills {
-  name: string;
-  proficiency: string;
 }

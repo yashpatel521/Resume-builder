@@ -8,7 +8,7 @@ const navItems: NavItemType[] = [
   },
   {
     title: "Preview",
-    href: "/resume/Preview",
+    href: "/resume/preview",
     icon: "InfoIcon",
   },
   {

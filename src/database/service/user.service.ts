@@ -1,5 +1,9 @@
 import { connectDB } from "@/database/mongodb";
 import User from "../models/User";
+import { getExperiencesByUserId } from "./experience.service";
+import { getEducationByUserId } from "./education.service";
+import { getProjectsByUserId } from "./project.service";
+import { getSkillsByUserId } from "./skills.service";
 
 export async function getUserByEmail(email: string) {
   await connectDB();
@@ -33,4 +37,22 @@ export async function updateUserById(
     console.error("Failed to update user:", error.message);
     throw new Error(error.message || "Failed to update user");
   }
+}
+
+export async function getAllDataByUserId(id: string) {
+  const userData = await getUserById(id);
+  if (!userData) {
+    throw new Error("User not found");
+  }
+  const experienceData = await getExperiencesByUserId(id);
+  const educationData = await getEducationByUserId(id);
+  const projectData = await getProjectsByUserId(id);
+  const skillsData = await getSkillsByUserId(id);
+  return {
+    user: userData,
+    experiences: experienceData,
+    education: educationData,
+    projects: projectData,
+    skills: skillsData,
+  };
 }
