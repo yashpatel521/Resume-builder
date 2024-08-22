@@ -50,7 +50,7 @@ export const RegisterForm = () => {
       <div className="grid w-full items-center gap-4">
         {error && <p className="text-red-500 text-sm">{error}</p>}
         <div className="flex flex-col space-y-1.5">
-          <Label htmlFor="name">Full Name</Label>
+          <Label htmlFor="name">First Name</Label>
           <Input
             id="firstName"
             type="text"
@@ -61,7 +61,7 @@ export const RegisterForm = () => {
           />
         </div>
         <div className="flex flex-col space-y-1.5">
-          <Label htmlFor="name">Full Name</Label>
+          <Label htmlFor="name">Last Name</Label>
           <Input
             id="lastName"
             type="text"
