@@ -11,16 +11,16 @@ const navItems: NavItemType[] = [
     href: "/resume/preview",
     icon: "InfoIcon",
   },
-  // {
-  //   title: "Templates",
-  //   href: "/resume/templates",
-  //   icon: "FileStack",
-  // },
-  // {
-  //   title: "Contact",
-  //   href: "/resume/Contact",
-  //   icon: "PhoneIcon",
-  // },
+  {
+    title: "Templates",
+    href: "/resume/templates",
+    icon: "FileStack",
+  },
+  {
+    title: "Contact",
+    href: "/resume/Contact",
+    icon: "PhoneIcon",
+  },
 ];
 
 export default navItems;

@@ -15,14 +15,14 @@ const LoginPage = () => {
       <Card className="max-w-[400px] w-full bg-white shadow-lg rounded-lg p-6">
         <CardHeader className="text-center">
           <CardTitle className="text-3xl font-bold text-gray-800">
-            Welcome Back
+            Login
           </CardTitle>
           <CardDescription className="text-gray-600">
             Enter your credentials to access your account.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <LoginForm buttonClassName="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md w-full" />
+          <LoginForm />
         </CardContent>
         <p className="text-gray-600 text-center mt-4">
           Don&apos;t have an account?
