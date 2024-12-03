@@ -28,7 +28,7 @@
     "html2pdf.js": "^0.10.2",
     "jspdf": "^2.5.1",
     "lucide-react": "^0.427.0",
-    "mongoose": "^8.5.2",
+    "mongoose": "^8.8.3",
     "next": "14.2.5",
     "next-auth": "^4.24.7",
     "next-themes": "^0.3.0",
